@@ -1,6 +1,19 @@
 import React, { Component } from "react";
 import "./App.css";
+
+import { connect } from 'react-redux';
+
+import { fetchSmurfs } from '../actions';
+
 class App extends Component {
+  state = {
+    url: `http://localhost:3333/smurfs`
+  };
+
+  componentDidMount(){
+    this.props.fetchSmurfs(this.state.url);
+  }
+
   render() {
     return (
       <div className="App">
@@ -13,4 +26,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default connect(null, { fetchSmurfs })(App);
