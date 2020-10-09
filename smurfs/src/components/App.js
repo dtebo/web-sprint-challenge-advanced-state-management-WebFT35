@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { fetchSmurfs } from '../actions';
 
 import SmurfList from './Smurfs/SmurfList';
+import SmurfForm from './Smurfs/SmurfForm';
 
 class App extends Component {
   state = {
@@ -21,6 +22,7 @@ class App extends Component {
       <div className="App">
         <h1>SMURFS! W/Redux</h1>
         <SmurfList />
+        <SmurfForm />
       </div>
     );
   }

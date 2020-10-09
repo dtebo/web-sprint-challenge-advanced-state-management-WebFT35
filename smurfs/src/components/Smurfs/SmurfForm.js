@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
 
+import { connect } from 'react-redux';
+
+import { addSmurf } from '../../actions';
+
 const SmurfForm = props => {
     const [smurf, setSmurf] = useState({});
+    const [url, setUrl] = useState(`http://localhost:3333/smurfs/`);
 
     const handleChanges = e => {
         setSmurf({
@@ -10,45 +15,54 @@ const SmurfForm = props => {
         });
     };
 
-    const handleSubmit = props => {
+    const handleSubmit = e => {
+        e.preventDefault();
 
+        props.addSmurf(url, smurf);
+
+        setSmurf({});
     };
 
     return(
         <>
-            <form onSubmit={handleSubmit}>
+            <form 
+                className='smurf-form'
+                onSubmit={handleSubmit}
+            >
                 <label htmlFor='name'>
                     Name:
-                    <input
-                        type='text'
-                        id='name'
-                        name='name'
-                        value={smurf.name}
-                        onChange={handleChanges}
-                    />
                 </label>
+                <input
+                    type='text'
+                    id='name'
+                    name='name'
+                    value={smurf.name}
+                    onChange={handleChanges}
+                />
                 <label htmlFor='name'>
-                    Name:
-                    <input
-                        type='text'
-                        id='age'
-                        name='age'
-                        value={smurf.age}
-                        onChange={handleChanges}
-                    />
+                    Age:
                 </label>
+                <input
+                    type='text'
+                    id='age'
+                    name='age'
+                    value={smurf.age}
+                    onChange={handleChanges}
+                />
                 <label htmlFor='height'>
-                    Name:
-                    <input
-                        type='text'
-                        id='height'
-                        name='height'
-                        value={smurf.height}
-                        onChange={handleChanges}
-                    />
+                    Height:
                 </label>
+                <input
+                    type='text'
+                    id='height'
+                    name='height'
+                    value={smurf.height}
+                    onChange={handleChanges}
+                />
                 <button>Add Smurf</button>
             </form>
         </>
-    )
-}
+    );
+};
+
+export default connect(null, {addSmurf})(SmurfForm);
